@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct LinkedList {
+    struct Node* head;
+};
+
+void insertAtPosition(struct LinkedList* list, int data, int position) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+
+    if (position == 1) {
+        newNode->next = list->head;
+        list->head = newNode;
+        return;
+    }
+
+    struct Node* current = list->head;
+    for (int i = 1; i < position - 1 && current != NULL; ++i) {
+        current = current->next;
+    }
+
+    if (current == NULL) {
+        printf("Invalid position.\n");
+        return;
+    }
+
+    newNode->next = current->next;
+    current->next = newNode;
+}
+
+int main() {
+    struct LinkedList list;
+    list.head = NULL;
+
+    return 0;
+}
